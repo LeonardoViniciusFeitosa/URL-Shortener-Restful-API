@@ -17,14 +17,14 @@ namespace Link_Shortener_Restful_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ShortUrl>> CreateAsync(CreateShortUrlDto dto) {
+        public async Task<ActionResult<ShortUrl>> Create(CreateShortUrlDto dto) {
             var url = await _Service.CreateShortUrl(dto);
 
-            return CreatedAtAction(nameof(GetByCodeAsync), new { code = url.UrlCode }, url);
+            return CreatedAtAction(nameof(GetByCode), new { code = url.UrlCode }, url);
         }
 
         [HttpGet("{code}")]
-        public async Task<ActionResult<ShortUrl?>> GetByCodeAsync(string code)
+        public async Task<ActionResult<ShortUrl?>> RedirectByCode(string code)
         {
             var url = await _Service.GetShortUrl(code);
 
@@ -32,16 +32,13 @@ namespace Link_Shortener_Restful_API.Controllers
             {
                 return NotFound();
             }
-
-            var ResponseDto = new ShortUrlResponseDto
             {
-                Url = url.OriginalUrl
-            };
-            return Ok(ResponseDto);
+                return Redirect(url.OriginalUrl);
+            }
         }
 
         [HttpDelete("{code}")]
-        public async Task<ActionResult<bool>> DeleteShortUrl(string code)
+        public async Task<ActionResult> DeleteShortUrl(string code)
         {
             var result = await _Service.DeleteShortUrl(code);
 
