@@ -34,5 +34,18 @@ namespace Link_Shortener_Restful_API.Controllers
             }
             return Ok(url);
         }
+
+        [HttpDelete("{code}")]
+        public async Task<ActionResult<bool>> DeleteShortUrl(string code)
+        {
+            var result = await _Service.DeleteShortUrl(code);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
     }
 }
