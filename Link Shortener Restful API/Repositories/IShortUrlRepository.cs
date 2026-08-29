@@ -7,5 +7,6 @@ namespace Link_Shortener_Restful_API.Repositories
         Task<bool> ExistsAsync(string code);
         Task<ShortUrl?> GetByCodeAsync(string code);
         Task<ShortUrl?> CreateAsync(ShortUrl shortUrl);
+        Task<bool> deleteByCodeAsync(string code);
     }
 }

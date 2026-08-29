@@ -49,5 +49,9 @@ namespace Link_Shortener_Restful_API.Services
         public async Task<ShortUrl?> GetShortUrl(string code) {
             return await _Repository.GetByCodeAsync(code);
         }
+
+        public async Task<bool> DeleteShortUrl(string code) {
+            return await _Repository.deleteByCodeAsync(code);
+        }
     }
 }
