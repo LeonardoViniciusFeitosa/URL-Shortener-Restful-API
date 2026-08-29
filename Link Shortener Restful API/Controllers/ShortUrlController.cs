@@ -32,7 +32,12 @@ namespace Link_Shortener_Restful_API.Controllers
             {
                 return NotFound();
             }
-            return Ok(url);
+
+            var ResponseDto = new ShortUrlResponseDto
+            {
+                Url = url.OriginalUrl
+            };
+            return Ok(ResponseDto);
         }
 
         [HttpDelete("{code}")]

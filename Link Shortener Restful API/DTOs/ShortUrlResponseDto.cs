@@ -5,6 +5,6 @@ namespace Link_Shortener_Restful_API.DTOs
 {
     public class ShortUrlResponseDto
     {
-        string Url { get; set; }
+        public string Url { get; set; }
     }
 }
